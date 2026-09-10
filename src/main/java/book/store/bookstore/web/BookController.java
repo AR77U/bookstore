@@ -5,6 +5,7 @@ import book.store.bookstore.domain.BookRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,20 @@ public class BookController {
     }
     @PostMapping("/save")
     public String savebook(Book book) {
+        bookRepository.save(book);
+        //TODO: process POST request
+        
+        return "redirect:/booklist";
+    }
+    
+    @GetMapping("/edit/{id}")
+    public String editBook(@PathVariable ("id")Long bookId, Model model) {
+        Book book = bookRepository.findById(bookId).orElseThrow();
+        model.addAttribute("book", book);
+        return "editbook";
+    }
+    @PostMapping("/edit/save")
+    public String saveBookEdit(@ModelAttribute Book book) {
         bookRepository.save(book);
         //TODO: process POST request
         

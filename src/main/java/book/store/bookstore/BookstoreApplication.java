@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import book.store.bookstore.domain.Book;
 import book.store.bookstore.domain.BookRepository;
+import book.store.bookstore.domain.Category;
+import book.store.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -28,6 +30,19 @@ public class BookstoreApplication {
 			log.info("Fetch all books");
 			for (Book book: repository.findAll()){
 				log.info(book.toString());
+			}
+		};
+	}
+	@Bean 
+	public CommandLineRunner categoryDemo (CategoryRepository repository){
+		return (args) -> {
+			log.info("List of categories");
+			repository.save(new Category(null, "Scifi"));
+			repository.save(new Category(null, "Manga"));
+
+			log.info("Fetch all categories");
+			for (Category category: repository.findAll()){
+				log.info(category.toString());
 			}
 		};
 	}

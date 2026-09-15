@@ -1,5 +1,7 @@
 package book.store.bookstore.domain;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity 
@@ -12,6 +14,9 @@ public class Category {
         private Long categoryId;
 
         private String name;
+
+        @OneToMany (cascade = CascadeType.ALL, mappedBy = "category")
+        private List<Book> books;
 
         public Category() {
         }
@@ -37,11 +42,20 @@ public class Category {
             this.name = name;
         }
 
+        public List<Book> getBooks() {
+            return books;
+        }
+
+        public void setBooks(List<Book> books) {
+            this.books = books;
+        }
+
         @Override
         public String toString() {
-            return "Category [categoryId=" + categoryId + ", name=" + name + "]";
+            return name;
         }
-        
+
+       
 
         
 

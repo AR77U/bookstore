@@ -21,31 +21,27 @@ public class BookstoreApplication {
 	}
 
 	@Bean 
-	public CommandLineRunner bookDemo (BookRepository repository){
+	public CommandLineRunner bookDemo (BookRepository brepository, CategoryRepository crepository){
 		return (args) ->{
 			log.info("List books ");
-			repository.save(new  Book("Metsänmorkulat", "Joklas", 1987, "645984358", 45.17));
-			repository.save(new  Book("Armolliset Apinat", "Jokrates", 1478, "6798457534", 67.47));
-			repository.save(new  Book("Armottomat Rapinat", "Jokrates", 1478, "6798457534", 67.47));
+			Category category1 = new Category(null, "Scifi");
+			crepository.save(category1);
+			Category category2 = new Category(null, "Manga");
+			crepository.save(category2);
+			Category category3 = new Category(null, "Thriller");
+			crepository.save(category3);
+
+
+			brepository.save(new  Book("Metsänmorkulat", "Joklas", 1987, "645984358", 45.17, category1));
+			brepository.save(new  Book("Armolliset Apinat", "Jokrates", 1478, "6798457534", 67.47, category2));
+			brepository.save(new  Book("Armottomat Rapinat", "Jokrates", 1478, "6798457534", 67.47, category3));
 
 			log.info("Fetch all books");
-			for (Book book: repository.findAll()){
+			for (Book book: brepository.findAll()){
 				log.info(book.toString());
 			}
 		};
 	}
-	@Bean 
-	public CommandLineRunner categoryDemo (CategoryRepository repository){
-		return (args) -> {
-			log.info("List of categories");
-			repository.save(new Category(null, "Scifi"));
-			repository.save(new Category(null, "Manga"));
 
-			log.info("Fetch all categories");
-			for (Category category: repository.findAll()){
-				log.info(category.toString());
-			}
-		};
-	}
 
 }

@@ -26,6 +26,7 @@ public class BookstoreApplication {
 			log.info("List books ");
 			repository.save(new  Book("Metsänmorkulat", "Joklas", 1987, "645984358", 45.17));
 			repository.save(new  Book("Armolliset Apinat", "Jokrates", 1478, "6798457534", 67.47));
+			repository.save(new  Book("Armottomat Rapinat", "Jokrates", 1478, "6798457534", 67.47));
 
 			log.info("Fetch all books");
 			for (Book book: repository.findAll()){

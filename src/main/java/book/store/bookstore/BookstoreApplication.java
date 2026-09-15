@@ -30,6 +30,8 @@ public class BookstoreApplication {
 			crepository.save(category2);
 			Category category3 = new Category(null, "Thriller");
 			crepository.save(category3);
+			Category category4 = new Category(null, "Romance");
+			crepository.save(category4);
 
 
 			brepository.save(new  Book("Metsänmorkulat", "Joklas", 1987, "645984358", 45.17, category1));

@@ -2,6 +2,7 @@ package book.store.bookstore.web;
 
 import book.store.bookstore.domain.Book;
 import book.store.bookstore.domain.BookRepository;
+import book.store.bookstore.domain.CategoryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class BookController {
+    private final CategoryRepository categoryRepository;
     private final BookRepository bookRepository;
-    BookController(BookRepository bookRepository) {
+    BookController(BookRepository bookRepository, CategoryRepository categoryRepository) {
         this.bookRepository = bookRepository;
+        this.categoryRepository = categoryRepository;
     }
     @GetMapping("/index")
     public String getBookName() {
@@ -36,6 +39,7 @@ public class BookController {
     @GetMapping("/add")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("category", categoryRepository.findAll());
         return "addbook";
     }
     @PostMapping("/save")

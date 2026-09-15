@@ -21,7 +21,16 @@
                 <label for="publicationYear">Year</label>
                 <input type="text" id="publicationYear" th:field="*{publicationYear}">
                 <div style="clear: both;display: block; height: 10px;"></div>
+                
+                <label for="categorylist">Category</label>
+                <select id="categorylist" th:field="*{category}" class="form-control">
+                <option th:each="category: ${category}"
+                    th:value="${category.categoryId}"
+                    th:text="${category.name}"></option>
+                </select>
+                <div style="clear: both;display: block; height: 10px;"></div>
                 <input type="submit" value="Save">
+                
             </form>
         </div>
     </body>

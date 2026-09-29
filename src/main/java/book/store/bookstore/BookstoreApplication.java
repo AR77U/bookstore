@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import book.store.bookstore.domain.BSUSER;
+import book.store.bookstore.domain.BSUSERRepository;
 import book.store.bookstore.domain.Book;
 import book.store.bookstore.domain.BookRepository;
 import book.store.bookstore.domain.Category;
@@ -14,7 +16,12 @@ import book.store.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
-	public static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
+	private final BSUSERRepository BSUSERRepository;
+    public static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
+
+    BookstoreApplication(BSUSERRepository BSUSERRepository) {
+        this.BSUSERRepository = BSUSERRepository;
+    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
@@ -38,6 +45,7 @@ public class BookstoreApplication {
 			brepository.save(new  Book("Armolliset Apinat", "Jokrates", 1478, "6798457534", 67.47, category2));
 			brepository.save(new  Book("Armottomat Rapinat", "Jokrates", 1478, "6798457534", 67.47, category3));
 
+			
 			log.info("Fetch all books");
 			for (Book book: brepository.findAll()){
 				log.info(book.toString());

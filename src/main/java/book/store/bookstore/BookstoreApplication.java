@@ -45,7 +45,12 @@ public class BookstoreApplication {
 			brepository.save(new  Book("Armolliset Apinat", "Jokrates", 1478, "6798457534", 67.47, category2));
 			brepository.save(new  Book("Armottomat Rapinat", "Jokrates", 1478, "6798457534", 67.47, category3));
 
-			
+			BSUSER user1 = new  BSUSER(null, "user1", "$2a$10$x6dSp1eOcGfqc/xd65kWX.pg56aKciCe5NdtvRQsJ8sj0l2L9mcUm", "USER"); //PASSWORD: yordle123
+			BSUSER user2 = new  BSUSER(null, "user2", "$2a$10$F1WabYS4n1kxuUTTqZJKuuQXttJOgiQZp.DlOtA142sFVCUnxJWUK", "ADMIN"); //PASSWORD:yordle47
+
+			BSUSERRepository.save(user1);
+			BSUSERRepository.save(user2);
+
 			log.info("Fetch all books");
 			for (Book book: brepository.findAll()){
 				log.info(book.toString());

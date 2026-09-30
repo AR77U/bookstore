@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -39,26 +40,9 @@ public class SecurityConfig {
     return http.build();
         
     }
-    @Bean 
-    public UserDetailsService userDetailsService(){
-        List<UserDetails> users = new ArrayList<>();
-
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        UserDetails user1 = User
-        .withUsername("user")
-        .password(passwordEncoder.encode("user"))
-        .roles("USER")
-        .build();
-
-        users.add(user1);
-
-        UserDetails user2 = User
-        .withUsername("admin")
-        .password(passwordEncoder.encode("admin"))
-        .roles("USER", "ADMIN")
-        .build();
-        users.add(user2);
-
-        return new InMemoryUserDetailsManager(users);
-   }
+  @Bean 
+  public PasswordEncoder passwordEncoder(){
+    return new BCryptPasswordEncoder();
+  }
+   
 }

@@ -3,6 +3,8 @@ package book.store.bookstore.web;
 import book.store.bookstore.domain.Book;
 import book.store.bookstore.domain.BookRepository;
 import book.store.bookstore.domain.CategoryRepository;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,7 @@ public class BookController {
         return "booklist";
     }
     @GetMapping("/delete/{id}")
+    @PreAuthorize ("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable ("id")Long bookId, Model model) {
         bookRepository.deleteById(bookId);
         return "redirect:../booklist";
